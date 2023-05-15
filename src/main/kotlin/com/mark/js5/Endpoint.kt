@@ -3,10 +3,10 @@ package com.mark.js5
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelOption
 import io.netty.channel.EventLoopGroup
-import org.jire.netrune.endpoint.Service
-import org.jire.netrune.endpoint.SessionInitializer
-import org.jire.netrune.net.netty4.DefaultEventLoopGroupFactory
-import org.jire.netrune.net.server.ServerBinding
+import com.mark.netrune.endpoint.Service
+import com.mark.netrune.endpoint.SessionInitializer
+import com.mark.netrune.net.netty4.DefaultEventLoopGroupFactory
+import com.mark.netrune.net.server.ServerBinding
 import org.jire.netrune.net.server.netty4.DefaultServerBootstrapFactory
 import org.jire.netrune.net.server.netty4.Netty4Server
 import org.slf4j.Logger

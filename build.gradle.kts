@@ -1,9 +1,9 @@
-group = "com.cache"
+group = "com.mark"
 version = 1.0
 
 plugins {
     kotlin("jvm") version "1.8.20"
-    `maven-publish`
+    id("maven-publish")
 }
 
 repositories {
@@ -40,6 +40,13 @@ dependencies {
 
 }
 
+tasks.withType<Jar>() {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    configurations["compileClasspath"].forEach { file: File ->
+        from(zipTree(file.absoluteFile))
+    }
+}
+
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
@@ -50,13 +57,24 @@ tasks {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/mark7625/osrs-data-packer")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
     publications {
-        create<MavenPublication>("maven") {
+        register<MavenPublication>("gpr") {
             groupId = "com.mark"
-            artifactId = "osrs-cache-packer"
+            artifactId = "packer"
             version = "1.0"
 
             from(components["java"])
+
         }
     }
 }

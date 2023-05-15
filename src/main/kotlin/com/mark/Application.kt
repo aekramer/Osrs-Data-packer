@@ -5,11 +5,11 @@ import com.mark.js5.Endpoint
 import com.mark.js5.InitService
 import com.mark.util.FileUtil
 import io.netty.channel.EventLoopGroup
-import org.jire.netrune.endpoint.Service
-import org.jire.netrune.endpoint.js5.Js5GroupRepository
-import org.jire.netrune.endpoint.js5.Openrs2Js5GroupRepository
-import org.jire.netrune.net.netty4.DefaultEventLoopGroupFactory
-import org.jire.netrune.net.netty4.EventLoopGroupFactory
+import com.mark.netrune.endpoint.Service
+import com.mark.netrune.endpoint.js5.Js5GroupRepository
+import com.mark.netrune.endpoint.js5.Openrs2Js5GroupRepository
+import com.mark.netrune.net.netty4.DefaultEventLoopGroupFactory
+import com.mark.netrune.net.netty4.EventLoopGroupFactory
 import org.openrs2.cache.DiskStore
 import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.Store

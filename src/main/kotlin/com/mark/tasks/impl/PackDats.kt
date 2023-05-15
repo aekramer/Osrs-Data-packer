@@ -2,11 +2,9 @@ package com.mark.tasks.impl
 
 import com.displee.cache.CacheLibrary
 import com.mark.tasks.CacheTask
-import com.mark.util.decompressGzipToBytes
 import com.mark.util.getFilesNoFilter
 import com.mark.util.progress
 import java.io.File
-import java.nio.file.Files
 
 /*
  * Packs Dats into a custom Archive for our 317 users

@@ -6,7 +6,6 @@ import me.tongfei.progressbar.ProgressBarStyle
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
-import java.io.IOException
 import java.nio.file.Path
 import java.time.Duration
 import java.time.LocalDateTime
