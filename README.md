@@ -2,6 +2,18 @@
 
 Packs data and updates the osrs cache
 
+### Import
+```
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+```
+
+```
+implementation("com.github.Mark7625:Osrs-Data-packer:32df17b8ff")
+```
+
 ## Features
 
 - Xteas Removal
