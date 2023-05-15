@@ -40,13 +40,6 @@ dependencies {
 
 }
 
-tasks.withType<Jar>() {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    configurations["compileClasspath"].forEach { file: File ->
-        from(zipTree(file.absoluteFile))
-    }
-}
-
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
