@@ -16,14 +16,14 @@ public class Test {
 
         List<CacheTask> tasks = List.of(
                 new RemoveXteas(),
-                new PackMaps(new File("C:\\Users\\Administrator\\Desktop\\RSPS\\Group\\Group-JS5\\data\\custom\\maps")),
-                new PackModels(new File("C:\\Users\\Administrator\\Desktop\\RSPS\\Group\\Group-JS5\\data\\custom\\models")),
-                new PackDats(new File("C:\\Users\\Administrator\\Desktop\\RSPS\\Group\\Group-JS5\\data\\custom\\dats"))
+                new PackMaps(new File("F:\\RSPS\\Cadarn\\Cadarn-Assets\\raw-cache\\maps\\"))
+                //new PackModels(new File("C:\\Users\\Administrator\\Desktop\\RSPS\\Group\\Group-JS5\\data\\custom\\models")),
+                //new PackDats(new File("C:\\Users\\Administrator\\Desktop\\RSPS\\Group\\Group-JS5\\data\\custom\\dats"))
         );
 
         Application application = new Builder().
                 taskType(TaskType.BUILD).
-                cacheLocation(new File("C:\\Users\\Administrator\\Desktop\\RSPS\\Group\\Group-JS5\\data\\cache\\")).
+                cacheLocation(new File("F:\\RSPS\\Cadarn\\Cadarn-Assets\\cache\\osrs\\")).
                 extraTasks(tasks)
          .build();
 

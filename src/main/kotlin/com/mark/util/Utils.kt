@@ -3,6 +3,7 @@ package com.mark.util
 import com.beust.klaxon.Klaxon
 import me.tongfei.progressbar.ProgressBar
 import me.tongfei.progressbar.ProgressBarStyle
+import org.apache.commons.io.FileUtils
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
@@ -13,6 +14,7 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.zip.GZIPInputStream
+import kotlin.system.exitProcess
 
 
 fun LocalDateTime.toEchochUTC() : Long {
@@ -94,5 +96,17 @@ fun decompressGzipToBytes(source: Path): ByteArray {
     return output.toByteArray()
 }
 
-fun getFiles(dir : File, vararg typeList : String) : List<File> = dir.listFiles()!!.filter { typeList.find { type -> it.extension == type }!!.count() == 1  }
+/*
+ * Finds all Files in a Dir
+ * @dir Base Dir
+ * @typeList List of Extension names no '.'
+ */
+fun getFiles(dir : File, vararg typeList : String) : List<File> {
+    if (dir.listFiles() == null) {
+        println("Unable to find dir: $dir")
+        exitProcess(0)
+    }
+    return FileUtils.listFiles(dir,typeList,true).toMutableList()
+
+}
 fun getFilesNoFilter(dir : File) : List<File> = dir.listFiles()!!.toList()
