@@ -81,17 +81,15 @@ data class ObjectDefinition(
             dos.writeString(name)
         }
 
-        if (sizeX != 1) {
-            dos.writeByte(14)
-            dos.writeByte(sizeX)
-        }
 
-        if (sizeY != 1) {
-            dos.writeByte(15)
-            dos.writeByte(sizeY)
-        }
+        dos.writeByte(14)
+        dos.writeByte(sizeX)
 
-        if (interactType == 0) {
+        dos.writeByte(15)
+        dos.writeByte(sizeY)
+
+
+        if (interactType == 0 && !blocksProjectile) {
             dos.writeByte(17)
         }
 
@@ -125,20 +123,15 @@ data class ObjectDefinition(
             dos.writeByte(27)
         }
 
-        if (decorDisplacement != 16) {
-            dos.writeByte(28)
-            dos.writeByte(decorDisplacement)
-        }
+        dos.writeByte(28)
+        dos.writeByte(decorDisplacement)
 
-        if (ambient != 0) {
-            dos.writeByte(29)
-            dos.writeByte(ambient)
-        }
+        dos.writeByte(29)
+        dos.writeByte(ambient)
 
-        if (contrast != 0) {
-            dos.writeByte(39)
-            dos.writeByte(contrast / 25)
-        }
+        dos.writeByte(39)
+        dos.writeByte(contrast / 25)
+
 
         if (actions.any { it != null }) {
             for (i in 0 until actions.size) {
@@ -181,20 +174,15 @@ data class ObjectDefinition(
             dos.writeByte(64)
         }
 
-        if (modelSizeX != 128) {
-            dos.writeByte(65)
-            dos.writeShort(modelSizeX)
-        }
 
-        if (modelSizeZ != 128) {
-            dos.writeByte(66)
-            dos.writeShort(modelSizeZ)
-        }
+        dos.writeByte(65)
+        dos.writeShort(modelSizeX)
 
-        if (modelSizeY != 128) {
-            dos.writeByte(67)
-            dos.writeShort(modelSizeY)
-        }
+        dos.writeByte(66)
+        dos.writeShort(modelSizeZ)
+
+        dos.writeByte(67)
+        dos.writeShort(modelSizeY)
 
         if (mapSceneID != -1) {
             dos.writeByte(68)
@@ -206,20 +194,16 @@ data class ObjectDefinition(
             dos.writeByte(blockingMask)
         }
 
-        if (offsetX != 0) {
-            dos.writeByte(70)
-            dos.writeShort(offsetX)
-        }
 
-        if (offsetZ != 0) {
-            dos.writeByte(71)
-            dos.writeShort(offsetZ)
-        }
+        dos.writeByte(70)
+        dos.writeShort(offsetX)
 
-        if (offsetY != 0) {
-            dos.writeByte(72)
-            dos.writeShort(offsetY)
-        }
+        dos.writeByte(71)
+        dos.writeShort(offsetZ)
+
+        dos.writeByte(72)
+        dos.writeShort(offsetY)
+
 
         if (obstructsGround) {
             dos.writeByte(73)
@@ -234,13 +218,13 @@ data class ObjectDefinition(
             dos.writeByte(supportsItems)
         }
 
-        if (ambientSoundId != -1 || anInt2083 != 0) {
+        if (ambientSoundId != -1) {
             dos.writeByte(78)
             dos.writeShort(ambientSoundId)
             dos.writeByte(anInt2083)
         }
 
-        if (anInt2112 != 0 || anInt2113 != 0 || anInt2083 != 0 && ambientSoundIds != null) {
+        if (ambientSoundIds != null) {
             dos.writeByte(79)
             dos.writeShort(anInt2112)
             dos.writeShort(anInt2113)
@@ -253,7 +237,7 @@ data class ObjectDefinition(
 
         if (clipType != -1) {
             dos.writeByte(81)
-            dos.writeByte(clipType)
+            dos.writeByte(clipType / 256)
         }
 
         if (mapAreaId != -1) {

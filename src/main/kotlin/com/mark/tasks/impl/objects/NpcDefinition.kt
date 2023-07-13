@@ -147,29 +147,24 @@ data class NpcDefinition(
             dos.writeShort(combatLevel)
         }
 
-        if (widthScale != 128) {
-            dos.writeByte(97)
-            dos.writeShort(widthScale)
-        }
 
-        if (heightScale != 128) {
-            dos.writeByte(98)
-            dos.writeShort(heightScale)
-        }
+        dos.writeByte(97)
+        dos.writeShort(widthScale)
+
+        dos.writeByte(98)
+        dos.writeShort(heightScale)
+
 
         if (hasRenderPriority) {
             dos.writeByte(99)
         }
 
-        if (ambient != 0) {
-            dos.writeByte(100)
-            dos.writeByte(ambient)
-        }
 
-        if (contrast != 0) {
-            dos.writeByte(101)
-            dos.writeByte(contrast)
-        }
+        dos.writeByte(100)
+        dos.writeByte(ambient)
+
+        dos.writeByte(101)
+        dos.writeByte(contrast)
 
         if (headIconArchiveIds != null) {
             dos.writeByte(102)
@@ -180,11 +175,10 @@ data class NpcDefinition(
             }
         }
 
-        if (rotation != 32) {
-            dos.writeByte(103)
-            dos.writeShort(rotation)
-        }
 
+        dos.writeByte(103)
+        dos.writeShort(rotation)
+        
         if ((varbitId != -1 || varpIndex != -1) && configs != null) {
             val `var` = configs!![configs!!.size - 1]
             dos.writeByte(if (`var` != -1) 118 else 106)
