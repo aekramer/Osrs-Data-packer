@@ -10,7 +10,7 @@ public class Test1 {
 
         Application application = new Builder().
                 taskType(TaskType.RUN_JS5).
-                cacheLocation(new File("C:\\Users\\Administrator\\Desktop\\RSPS\\Group\\Group-JS5\\data\\cache\\"))
+                cacheLocation(new File("F:\\RSPS\\Cadarn\\Cadarn-Assets\\cache\\"))
          .build();
 
         application.initialize();

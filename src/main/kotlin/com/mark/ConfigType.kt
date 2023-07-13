@@ -1,7 +1,7 @@
 package com.mark
 
 
-enum class Js5ConfigType(val id: Int, val nameFormatted: String) {
+enum class ConfigType(val id: Int, val nameFormatted: String) {
     UNDERLAY(1, "Underlays"),
     IDENTKIT(3, "Identity Kits"),
     OVERLAY(4, "Overlays"),

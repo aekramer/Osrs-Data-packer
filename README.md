@@ -20,6 +20,7 @@ implementation("com.github.Mark7625:Osrs-Data-packer:32df17b8ff")
 - Map Packer
 - Model Packer
 - Dat Packer for 317
+- Def Packer
 - Ability to add your own Packer tasks with the api
 
 # Usage
@@ -36,6 +37,9 @@ tasks you wish to do when updating rev or repacking cache
 - Pack Dats [This pack any custom dats u may need for our 317 users]
 - Pack Models
 - Pack Maps
+- Pack Items
+- Pack Npcs
+- Pack Objects
 - Remove Xteas [This will remove any xteas from the default osrs cache]
 
 ---
@@ -137,6 +141,12 @@ library is the cache instance and you should always refer to this when editing t
 once this class is made you just add it to the list in the builder
 
 ---
+
+### Definitions Example
+
+![img.png](img.png)
+
+![img_1.png](img_1.png)
 
 ### Credits
 - Displee [Cache Lib] [https://github.com/Displee/rs-cache-library]
