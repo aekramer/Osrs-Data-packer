@@ -3,13 +3,13 @@ package com.mark.netrune.endpoint.game
 import com.google.gson.Gson
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import java.nio.file.Path
 import kotlin.io.path.bufferedReader
 
 object DefaultXteaRepository : XteaRepository {
 
-    private val map: Int2ObjectMap<XteaKey> = Int2ObjectOpenHashMap()
+    private val map: Int2ObjectMap<SymmetricKey> = Int2ObjectOpenHashMap()
 
     @JvmStatic
     @JvmOverloads
@@ -21,14 +21,14 @@ object DefaultXteaRepository : XteaRepository {
             val xteas = gson.fromJson(reader, Array<Xtea?>::class.java)
             for (xtea in xteas) {
                 xtea ?: continue
-                set(xtea.mapsquare, XteaKey.fromIntArray(xtea.key))
+                set(xtea.mapsquare, SymmetricKey.fromIntArray(xtea.key))
             }
         }
     }
 
-    override operator fun get(region: Int): XteaKey? = map.get(region)
+    override operator fun get(region: Int): SymmetricKey? = map.get(region)
 
-    override fun set(region: Int, key: XteaKey) {
+    override fun set(region: Int, key: SymmetricKey) {
         map[region] = key
     }
 

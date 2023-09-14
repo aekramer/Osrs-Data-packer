@@ -1,11 +1,11 @@
 package com.mark.netrune.endpoint.game
 
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 
 interface XteaRepository {
 
-    operator fun get(region: Int): XteaKey?
+    operator fun get(region: Int): SymmetricKey?
 
-    operator fun set(region: Int, key: XteaKey)
+    operator fun set(region: Int, key: SymmetricKey)
 
 }

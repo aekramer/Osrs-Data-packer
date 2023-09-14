@@ -13,7 +13,7 @@ import com.mark.netrune.endpoint.login.outgoing.LoginResponse
 import com.mark.netrune.endpoint.login.outgoing.SolveProofOfWorkEncoder
 import org.openrs2.buffer.readString
 import org.openrs2.crypto.IsaacRandom
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.crypto.xteaDecrypt
 import java.math.BigInteger
 import java.util.concurrent.Executor
@@ -85,7 +85,7 @@ class LoginService(
                 val check = blockData.readUnsignedByte().toInt()
                 require(check == 1)
 
-                val clientXteaKey = XteaKey(
+                val clientXteaKey = SymmetricKey(
                     blockData.readInt(),
                     blockData.readInt(),
                     blockData.readInt(),
@@ -95,7 +95,7 @@ class LoginService(
                 val serverSeed = blockData.readLong()
 
                 if (message.reconnect) {
-                    val previousXteaKey = XteaKey(
+                    val previousXteaKey = SymmetricKey (
                         blockData.readInt(),
                         blockData.readInt(),
                         blockData.readInt(),
@@ -138,7 +138,7 @@ class LoginService(
     private fun handleXtea(
         session: Session,
         message: LoginConnect = session.loginConnect,
-        clientXteaKey: XteaKey
+        clientXteaKey: SymmetricKey
     ) {
         val xteaData = message.xteaBlockData
         try {
