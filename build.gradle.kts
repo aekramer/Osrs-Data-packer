@@ -22,10 +22,11 @@ dependencies {
     implementation("com.beust:klaxon:5.5")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("net.lingala.zip4j:zip4j:2.9.1")
-    implementation("com.displee:rs-cache-library:6.8")
     implementation("commons-io:commons-io:2.11.0")
-
+    implementation("com.displee:disio:2.2")
     implementation("it.unimi.dsi:fastutil:8.5.12")
+    implementation("com.github.jponge:lzma-java:1.3")
+    implementation("org.apache.ant:ant:1.10.7")
     implementation("io.netty:netty-all:4.1.87.Final")
     implementation("org.openrs2", "openrs2", "0.1.0-SNAPSHOT")
     implementation("org.openrs2", "openrs2-buffer", "0.1.0-SNAPSHOT")
