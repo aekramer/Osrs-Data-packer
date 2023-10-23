@@ -2,23 +2,43 @@ package com.mark
 
 import com.mark.tasks.CacheTask
 import java.io.File
+import java.nio.file.Path
 
-class Builder {
+val DEFAULT_PATH = Path.of("data", "cache").toFile()
 
-    var type: TaskType = TaskType.RUN_JS5
+class Builder(var type : TaskType) {
+
     var extraTasks: List<CacheTask> = emptyList()
-    var settingLocation: File = File("./packerConfig.properties")
-    var cacheLocation: File? = null
+    var cacheLocation: File = DEFAULT_PATH
+    var cacheRevision: Int = -1
+    var js5Revision: Int = -1
+    var js5Ports: List<Int> = listOf(443, 43594, 50000)
 
-    fun taskType(type: TaskType) = apply { this.type = type }
-    fun extraTasks(type: List<CacheTask>) = apply { this.extraTasks = type }
-
-    fun configLocation(settingsLoc: File) = apply { this.settingLocation = settingsLoc }
+    fun extraTasks(vararg type: CacheTask) = apply { this.extraTasks = type.toList() }
 
     fun cacheLocation(cacheLocation: File) = apply { this.cacheLocation = cacheLocation }
+    fun js5Revision(rev: Int) = apply { this.js5Revision = rev }
+    fun cacheRevision(rev: Int) = apply { this.js5Revision = rev }
+    fun js5Ports(ports: List<Int>) = apply { this.js5Ports = ports }
+    fun build(): Application {
 
-    fun build() = Application(this)
+        if (type == TaskType.RUN_JS5) {
+            if (js5Revision == -1) error("Please define a js5 Revision your network is using with js5Revision(rev)")
+        }
+        if (type == TaskType.UPDATE_REV) {
+            if(Application.builder.cacheRevision == -1) logger.info { "Using Cache Rev [-1] this will download latest osrs cache when updating revs" }
+        }
 
+        return Application(this)
+    }
+
+    override fun toString(): String {
+        return "Builder(type=$type, extraTasks=$extraTasks, ${if (extraTasks.isEmpty()) "No extra tasks defined" else ""}" +
+                "cacheLocation=$cacheLocation ${if (cacheLocation == DEFAULT_PATH) "Is your Path Correct?" else ""}, " +
+                "cacheRevision=$cacheRevision ${if (cacheRevision == -1) "will download latest OSRS cache" else ""}, " +
+                "js5Revision=$js5Revision, " +
+                "js5Ports=$js5Ports)"
+    }
 
 
 }

@@ -41,9 +41,9 @@ object DownloadOSRS {
     private const val CACHE_DOWNLOAD_LOCATION = "https://archive.openrs2.org/caches.json"
 
     fun init() {
-        println(Application.properties.getCacheBase())
+        println(Application.builder.cacheLocation)
         val time = measureTimeMillis {
-            val rev = Application.properties.getRevision()
+            val rev = Application.builder.cacheRevision
 
             logger.info { "Looking for cache to download: ${if (rev == -1) "Latest" else rev}" }
             val caches = Gson().fromJson(URL(CACHE_DOWNLOAD_LOCATION).readText(), Array<CacheInfo>::class.java)
@@ -66,7 +66,7 @@ object DownloadOSRS {
         try {
             val url = "https://archive.openrs2.org/caches/${id}/keys.json"
             File(FileUtil.getTemp(), "xteas.json").writeText(URL(url).readText())
-            File(Application.properties.getCacheBase(), "xteas.json").writeText(URL(url).readText())
+            File(Application.builder.cacheLocation, "xteas.json").writeText(URL(url).readText())
         } catch (e: Exception) {
             logger.error { "Unable to write Xteas $e" }
         }
@@ -112,14 +112,14 @@ object DownloadOSRS {
 
     private fun getLatest(caches: Array<CacheInfo>) = caches
         .filter { it.game.contains("oldschool") }
-        .filter { !it.timestamp.isNullOrEmpty() }
+        .filter { it.timestamp.isNotEmpty() }
         .filter { it.builds.isNotEmpty() }
         .maxByOrNull { it.timestamp.stringToTimestamp().toEchochUTC()  } ?: error("Unable to find Latest Revision")
 
 
     private fun findRevision(rev : Int,caches: Array<CacheInfo>) = caches
         .filter { it.game.contains("oldschool") }
-        .filter { !it.timestamp.isNullOrEmpty() }
+        .filter { it.timestamp.isNotEmpty() }
         .filter { it.builds.isNotEmpty() && it.builds[0].major == rev }
         .maxByOrNull { it.timestamp.stringToTimestamp().toEchochUTC()   } ?: error("Unable to find Latest Revision: $rev")
 

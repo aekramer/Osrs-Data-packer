@@ -2,7 +2,7 @@ group = "com.mark"
 version = 1.0
 
 plugins {
-    kotlin("jvm") version "1.8.20"
+    kotlin("jvm")
     id("maven-publish")
 }
 
@@ -17,37 +17,39 @@ repositories {
 
 dependencies {
     implementation("io.github.microutils:kotlin-logging:1.12.5")
-    implementation("org.slf4j:slf4j-simple:1.7.29")
+    val slf4jVersion = "2.0.9"
+    implementation("org.slf4j:slf4j-api:$slf4jVersion")
+    runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation("me.tongfei:progressbar:0.9.2")
     implementation("com.beust:klaxon:5.5")
     implementation("com.google.code.gson:gson:2.8.9")
-    implementation("net.lingala.zip4j:zip4j:2.9.1")
+    implementation("net.lingala.zip4j:zip4j:2.10.0")
     implementation("commons-io:commons-io:2.11.0")
     implementation("com.displee:disio:2.2")
-    implementation("it.unimi.dsi:fastutil:8.5.12")
     implementation("com.github.jponge:lzma-java:1.3")
-    implementation("org.apache.ant:ant:1.10.7")
-    implementation("io.netty:netty-all:4.1.87.Final")
-    implementation("org.openrs2", "openrs2", "0.1.0-SNAPSHOT")
-    implementation("org.openrs2", "openrs2-buffer", "0.1.0-SNAPSHOT")
-    implementation("org.openrs2", "openrs2-crypto", "0.1.0-SNAPSHOT")
-    implementation("org.openrs2", "openrs2-cache", "0.1.0-SNAPSHOT")
+    implementation("org.apache.ant:ant:1.10.11")
 
-    implementation("io.netty:netty-transport-native-kqueue:4.1.92.Final")
-    implementation("io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.21.Final")
+    for (module in listOf(
+        "handler",
+        "buffer",
+        "transport-native-epoll",
+        "transport-native-kqueue",
+    )) implementation("io.netty:netty-$module:4.1.99.Final")
 
+    implementation("io.netty.incubator:netty-incubator-transport-native-io_uring:0.0.22.Final")
+
+    implementation("it.unimi.dsi:fastutil:8.5.12")
     implementation("org.jctools:jctools-core:4.0.1")
+
+    for (module in listOf("buffer", "cache"))
+        implementation("org.openrs2:openrs2-$module:0.1.0-SNAPSHOT")
 
 
 }
 
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-    }
+
+kotlin {
+    jvmToolchain(17)
 }
 
 publishing {

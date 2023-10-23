@@ -10,7 +10,6 @@ object Packer {
     fun init() {
 
         library?.let {
-
             Application.builder.extraTasks.forEach { task ->
                 task.init(it)
             }
@@ -19,11 +18,12 @@ object Packer {
             it.rebuild(FileUtil.getTempDir("rebuilt"))
             it.close()
 
-            val tempPath = Application.properties.getCacheBase()
-            FileUtil.getTempDir("rebuilt").listFiles().filter { it.extension.contains("dat") || it.extension.contains("idx") }.forEach {
-                val loc = File(tempPath,it.name)
-                it.copyTo(loc,true)
-            }
+            val tempPath = Application.builder.cacheLocation
+            FileUtil.getTempDir("rebuilt").listFiles()?.filter { it.extension.contains("dat") || it.extension.contains("idx") }
+                ?.forEach { file ->
+                    val loc = File(tempPath,file.name)
+                    file.copyTo(loc,true)
+                }
 
             FileUtil.getTemp().deleteRecursively()
         } ?: run {

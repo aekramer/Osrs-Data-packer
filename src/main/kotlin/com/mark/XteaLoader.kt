@@ -5,7 +5,7 @@ import com.mark.util.FileUtil
 import mu.KotlinLogging
 import java.io.File
 
-private val logger = KotlinLogging.logger {}
+val logger = KotlinLogging.logger {}
 
 data class Xtea(
     val mapsquare: Int,
