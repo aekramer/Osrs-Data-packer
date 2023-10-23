@@ -39,6 +39,7 @@ class Application(configs: Builder) {
                     Packer.init()
                 }catch (e : Exception) {
                     tempPath.delete()
+                    e.printStackTrace()
                     logger.error { "Unable to build cache" }
                 }
             }

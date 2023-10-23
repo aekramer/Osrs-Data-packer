@@ -13,7 +13,7 @@ import java.io.*
  * A class handling LZMA compression.
  * @author Displee (credits to Techdaan)
  */
-class LZMACompressor : Compressor {
+object LZMACompressor {
 
     private val DECODER = Decoder()
     private val ENCODER = Encoder()
@@ -33,10 +33,10 @@ class LZMACompressor : Compressor {
         ENCODER.setEndMarkerMode(false)
     }
 
-    override fun compress(bytes: ByteArray): ByteArray {
+    fun compress(decompressed: ByteArray): ByteArray {
         val baos = ByteArrayOutputStream()
         try {
-            val bais = ByteArrayInputStream(bytes)
+            val bais = ByteArrayInputStream(decompressed)
             val lzma = LzmaOutputStream(baos, ENCODER_WRAPPER)
             bais.writeTo(lzma)
             baos.close()
@@ -48,11 +48,15 @@ class LZMACompressor : Compressor {
         return baos.toByteArray()
     }
 
-    override fun decompress(buffer: InputBuffer, compressedData: ByteArray, compressedSize: Int, decompressedSize: Int, offset: Int): ByteArray {
+    fun decompress(buffer: InputBuffer, decompressedLength: Int): ByteArray {
         val output = OutputBuffer(buffer.remaining())
         output.writeBytes(buffer.raw(), buffer.offset, buffer.remaining())
+        return decompress(output.raw(), decompressedLength)
+    }
+
+    fun decompress(compressed: ByteArray, decompressedLength: Int): ByteArray {
         return try {
-            decompress(ByteArrayInputStream(output.raw()), decompressedSize)
+            decompress(ByteArrayInputStream(compressed), decompressedLength)
         } catch (e: IOException) {
             e.printStackTrace()
             byteArrayOf()
