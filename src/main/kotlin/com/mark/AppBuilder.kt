@@ -16,6 +16,8 @@ class Builder(var type : TaskType) {
 
     fun extraTasks(vararg type: CacheTask) = apply { this.extraTasks = type.toList() }
 
+    fun extraTasks(types: List<CacheTask>) = apply { this.extraTasks = types }
+
     fun cacheLocation(cacheLocation: File) = apply { this.cacheLocation = cacheLocation }
     fun js5Revision(rev: Int) = apply { this.js5Revision = rev }
     fun cacheRevision(rev: Int) = apply { this.js5Revision = rev }
