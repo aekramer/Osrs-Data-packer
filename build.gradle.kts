@@ -13,6 +13,8 @@ repositories {
     maven(url = "https://jitpack.io")
 }
 
+
+
 dependencies {
     implementation("io.github.microutils:kotlin-logging:1.12.5")
     val slf4jVersion = "2.0.9"
@@ -47,9 +49,4 @@ dependencies {
 
 kotlin {
     jvmToolchain(11)
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
 }
