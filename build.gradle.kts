@@ -13,8 +13,6 @@ repositories {
     maven(url = "https://jitpack.io")
 }
 
-
-
 dependencies {
     implementation("io.github.microutils:kotlin-logging:1.12.5")
     val slf4jVersion = "2.0.9"
@@ -48,33 +46,10 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(11)
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/mark7625/osrs-data-packer")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-    publications {
-        register<MavenPublication>("gpr") {
-            groupId = "com.mark"
-            artifactId = "packer"
-            version = "1.0"
-
-            from(components["java"])
-
-        }
-    }
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
