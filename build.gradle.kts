@@ -47,14 +47,13 @@ dependencies {
 
 }
 
+kotlin {
+    jvmToolchain(17)
+}
 
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 publishing {
