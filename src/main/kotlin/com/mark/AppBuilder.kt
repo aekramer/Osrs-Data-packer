@@ -13,7 +13,7 @@ class Builder(var type : TaskType) {
     var cacheRevision: Int = -1
     var js5Revision: Int = -1
     var js5Ports: List<Int> = listOf(443, 43594, 50000)
-
+    var supportPrefetch: Boolean = true
     fun extraTasks(vararg type: CacheTask) = apply { this.extraTasks = type.toList() }
 
     fun extraTasks(types: List<CacheTask>) = apply { this.extraTasks = types }
@@ -22,6 +22,7 @@ class Builder(var type : TaskType) {
     fun js5Revision(rev: Int) = apply { this.js5Revision = rev }
     fun cacheRevision(rev: Int) = apply { this.js5Revision = rev }
     fun js5Ports(ports: List<Int>) = apply { this.js5Ports = ports }
+    fun supportPrefetch(state: Boolean) = apply { this.supportPrefetch = state }
     fun build(): Application {
 
         if (type == TaskType.RUN_JS5) {

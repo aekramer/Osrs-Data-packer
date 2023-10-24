@@ -9,7 +9,7 @@ import io.netty.channel.epoll.EpollMode
 import io.netty.channel.socket.SocketChannel
 
 class Js5ServerBootstrapFactory(
-    private val channelInitializer: ChannelInitializer<SocketChannel> = Js5ChannelInitializer(),
+    private val channelInitializer: ChannelInitializer<SocketChannel>,
 
     private val allocator: ByteBufAllocator = ByteBufAllocator.DEFAULT,
 
@@ -34,7 +34,7 @@ class Js5ServerBootstrapFactory(
      option(ChannelOption.ALLOCATOR, allocator)
         childOption(ChannelOption.ALLOCATOR, allocator)
 
-        //childOption(ChannelOption.AUTO_READ, autoRead)
+        childOption(ChannelOption.AUTO_READ, autoRead)
         childOption(ChannelOption.TCP_NODELAY, tcpNoDelay)
         childOption(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectTimeoutMillis)
 

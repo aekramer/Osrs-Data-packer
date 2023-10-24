@@ -4,7 +4,7 @@ import io.netty.channel.ChannelFuture
 import mu.KotlinLogging
 
 class Js5Service(
-    bootstrapFactory: BootstrapFactory = Js5ServerBootstrapFactory()
+    bootstrapFactory: BootstrapFactory = Js5ServerBootstrapFactory(Js5ChannelInitializer())
 ) : AutoCloseable {
 
     private val logger = KotlinLogging.logger {}

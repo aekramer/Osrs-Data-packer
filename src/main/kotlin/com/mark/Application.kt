@@ -4,6 +4,7 @@ import com.displee.cache.CacheLibrary
 import com.mark.util.FileUtil
 import mu.KotlinLogging
 import org.jire.js5server.Js5Service
+import org.jire.js5server.codec.js5.Js5Handler
 import java.io.File
 
 class Application(configs: Builder) {
@@ -54,6 +55,10 @@ class Application(configs: Builder) {
 
         for (port in builder.js5Ports) {
             service.listen(port)
+        }
+
+        if (builder.supportPrefetch) {
+            Js5Handler.startPrefetching()
         }
 
 

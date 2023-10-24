@@ -111,7 +111,9 @@ class Js5Handler(
 
     @Deprecated("Deprecated in Java")
     override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
-        logger.error("Exception in JS5", cause)
+        if (!cause.toString().contains("Connection reset")) {
+            logger.error("Exception in JS5", cause)
+        }
     }
 
     companion object {

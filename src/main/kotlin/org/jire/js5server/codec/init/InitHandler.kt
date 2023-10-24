@@ -20,6 +20,10 @@ class InitHandler(
 
     private val logger = KotlinLogging.logger {}
 
+    override fun channelActive(ctx: ChannelHandlerContext) {
+        ctx.read()
+    }
+
     override fun channelRead0(ctx: ChannelHandlerContext, msg: InitRequest) {
         when (msg) {
             is InitRequest.Js5 -> {
