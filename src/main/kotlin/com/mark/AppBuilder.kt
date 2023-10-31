@@ -20,7 +20,7 @@ class Builder(var type : TaskType) {
 
     fun cacheLocation(cacheLocation: File) = apply { this.cacheLocation = cacheLocation }
     fun js5Revision(rev: Int) = apply { this.js5Revision = rev }
-    fun cacheRevision(rev: Int) = apply { this.js5Revision = rev }
+    fun cacheRevision(rev: Int) = apply { this.cacheRevision = rev }
     fun js5Ports(ports: List<Int>) = apply { this.js5Ports = ports }
     fun supportPrefetch(state: Boolean) = apply { this.supportPrefetch = state }
     fun build(): Application {
@@ -29,7 +29,7 @@ class Builder(var type : TaskType) {
             if (js5Revision == -1) error("Please define a js5 Revision your network is using with js5Revision(rev)")
         }
         if (type == TaskType.UPDATE_REV) {
-            if(Application.builder.cacheRevision == -1) logger.info { "Using Cache Rev [-1] this will download latest osrs cache when updating revs" }
+            if(cacheRevision == -1) logger.info { "Using Cache Rev [-1] this will download latest osrs cache when updating revs" }
         }
 
         return Application(this)
