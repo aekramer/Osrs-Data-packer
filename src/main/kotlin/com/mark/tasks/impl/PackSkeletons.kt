@@ -8,22 +8,22 @@ import java.io.File
 import java.nio.file.Files
 
 /*
- * Packs Models into the osrs cache
+ * Packs Skeletons into the osrs cache
  */
-class PackModels(private val modelDirectory : File) : CacheTask() {
+class PackSkeletons(private val skellyDirectory : File) : CacheTask() {
     override fun init(library: CacheLibrary) {
-        val modelSize = getFiles(modelDirectory,"gz","dat").size
-        val progressModels = progress("Packing Models", modelSize)
+        val modelSize = getFiles(skellyDirectory,"gz","dat").size
+        val progressModels = progress("Packing Skeletons", modelSize)
         if (modelSize != 0) {
-            getFiles(modelDirectory,"gz","dat").forEach {
+            getFiles(skellyDirectory,"gz","dat").forEach {
                 val id = it.nameWithoutExtension.toInt()
                 val buffer = if (it.extension == "gz") decompressGzipToBytes(it.toPath()) else Files.readAllBytes(it.toPath())
 
-                library.put(ArchiveIndex.MODELS, id, buffer)
+                library.put(ArchiveIndex.SKELETONS, id, buffer)
 
                 progressModels.step()
             }
-            library.index(7).update()
+            library.index(ArchiveIndex.SKELETONS).update()
             progressModels.close()
         }
     }

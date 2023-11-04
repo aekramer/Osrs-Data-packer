@@ -1,6 +1,10 @@
 package com.mark.util
 
 import com.beust.klaxon.Klaxon
+import com.displee.cache.CacheLibrary
+import com.displee.cache.index.Index
+import com.mark.ArchiveIndex
+import com.mark.ConfigType
 import me.tongfei.progressbar.ProgressBar
 import me.tongfei.progressbar.ProgressBarStyle
 import org.apache.commons.io.FileUtils
@@ -36,6 +40,22 @@ fun progress(task : String, amt : Long) : ProgressBar {
         0L,
         Duration.ZERO
     )
+}
+
+fun CacheLibrary.put(index : ArchiveIndex, id : Int, data : ByteArray) {
+    this.put(index.id,id,data)
+}
+
+fun CacheLibrary.put(index : ArchiveIndex, id : String, data : ByteArray) {
+    this.put(index.id,id,data)
+}
+
+fun CacheLibrary.put(index : ArchiveIndex, config : ConfigType, id : String, data : ByteArray) {
+    this.put(index.id,config.id,id,data)
+}
+
+fun CacheLibrary.index(index : ArchiveIndex) : Index {
+    return this.index(index.id)
 }
 
 fun progress(task : String, amt : Int) : ProgressBar {

@@ -1,10 +1,11 @@
-package com.mark.tasks.impl.objects
+package com.mark.tasks.impl.defs
 
 import com.beust.klaxon.Klaxon
 import com.displee.cache.CacheLibrary
 import com.mark.ArchiveIndex
 import com.mark.ConfigType
 import com.mark.tasks.CacheTask
+import com.mark.tasks.impl.defs.impl.ObjectDefinition
 import com.mark.util.getArchive
 import com.mark.util.getFiles
 import com.mark.util.getIndex

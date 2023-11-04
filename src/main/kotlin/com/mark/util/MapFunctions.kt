@@ -11,8 +11,8 @@ object MapFunctions {
         val mapArchiveName = "m" + regionX + "_" + regionY
         val landArchiveName = "l" + regionX + "_" + regionY
 
-        library.put(ArchiveIndex.MAPS.id, mapArchiveName, tileData)
-        library.put(ArchiveIndex.MAPS.id, landArchiveName, objData)
+        library.put(ArchiveIndex.MAPS, mapArchiveName, tileData)
+        library.put(ArchiveIndex.MAPS, landArchiveName, objData)
 
     }
 

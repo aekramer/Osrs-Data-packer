@@ -8,22 +8,22 @@ import java.io.File
 import java.nio.file.Files
 
 /*
- * Packs Models into the osrs cache
+ * Packs Animations into the osrs cache
  */
-class PackModels(private val modelDirectory : File) : CacheTask() {
+class PackAnimations(private val animationDirectory : File) : CacheTask() {
     override fun init(library: CacheLibrary) {
-        val modelSize = getFiles(modelDirectory,"gz","dat").size
-        val progressModels = progress("Packing Models", modelSize)
+        val modelSize = getFiles(animationDirectory,"gz","dat").size
+        val progressModels = progress("Packing Animations", modelSize)
         if (modelSize != 0) {
-            getFiles(modelDirectory,"gz","dat").forEach {
+            getFiles(animationDirectory,"gz","dat").forEach {
                 val id = it.nameWithoutExtension.toInt()
                 val buffer = if (it.extension == "gz") decompressGzipToBytes(it.toPath()) else Files.readAllBytes(it.toPath())
 
-                library.put(ArchiveIndex.MODELS, id, buffer)
+                library.put(ArchiveIndex.ANIMATIONS, id, buffer)
 
                 progressModels.step()
             }
-            library.index(7).update()
+            library.index(ArchiveIndex.ANIMATIONS).update()
             progressModels.close()
         }
     }

@@ -1,9 +1,12 @@
 package com.mark.tasks.impl
 
 import com.displee.cache.CacheLibrary
+import com.mark.ArchiveIndex
+import com.mark.ConfigType
 import com.mark.tasks.CacheTask
 import com.mark.util.getFilesNoFilter
 import com.mark.util.progress
+import com.mark.util.put
 import java.io.File
 
 /*
@@ -15,7 +18,7 @@ class PackDats(private val datsDirectory : File) : CacheTask() {
         val progressdats = progress("Packing Data", datsSize)
         if (datsSize != 0) {
             getFilesNoFilter(datsDirectory).forEach {
-                library.put(2, 40, it.nameWithoutExtension, it.readBytes())
+                library.put(ArchiveIndex.CONFIGS, ConfigType.CONFIGS_317,it.nameWithoutExtension, it.readBytes())
                 progressdats.step()
             }
             progressdats.close()

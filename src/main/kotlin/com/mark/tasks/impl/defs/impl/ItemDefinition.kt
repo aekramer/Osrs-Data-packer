@@ -1,4 +1,4 @@
-package com.mark.tasks.impl.objects
+package com.mark.tasks.impl.defs.impl
 
 import OutputStream
 

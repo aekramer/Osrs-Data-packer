@@ -1,33 +1,31 @@
-package com.mark.tasks.impl.objects
+package com.mark.tasks.impl.defs
 
 import com.beust.klaxon.Klaxon
 import com.displee.cache.CacheLibrary
 import com.mark.ArchiveIndex
 import com.mark.ConfigType
 import com.mark.tasks.CacheTask
-import com.mark.util.getArchive
-import com.mark.util.getFiles
-import com.mark.util.getIndex
-import com.mark.util.progress
+import com.mark.tasks.impl.defs.impl.SequenceDefinition
+import com.mark.util.*
 import java.io.File
 
 /*
- * Packs Item Definitions into the cache
+ * Packs Item Sequences into the cache
  */
-class PackItems(private val npcDir : File) : CacheTask() {
+class PackSequences(private val seqDir : File) : CacheTask() {
     override fun init(library: CacheLibrary) {
-        val size = getFiles(npcDir,"json").size
-        val progress = progress("Packing Items", size)
+        val size = getFiles(seqDir,"json").size
+        val progress = progress("Packing Sequences", size)
         val errors : MutableMap<String, String> = emptyMap<String, String>().toMutableMap()
         if (size != 0) {
-            getFiles(npcDir,"json").forEach {
-                val def = Klaxon().parse<ItemDefinition>(it.readText())?: return@forEach
+            getFiles(seqDir,"json").forEach {
+                val def = Klaxon().parse<SequenceDefinition>(it.readText())?: return@forEach
                 if (def.id == 0) {
                     errors[it.toString()] = "ID is 0 please set a id for the object to pack"
                     return@forEach
                 }
 
-                library.getIndex(ArchiveIndex.CONFIGS).getArchive(ConfigType.ITEM).add(def.id, def.encode())
+                library.getIndex(ArchiveIndex.CONFIGS).getArchive(ConfigType.SEQUENCE).add(def.id, def.encode())
 
                 progress.step()
             }

@@ -1,7 +1,6 @@
-package com.mark.tasks.impl.objects
+package com.mark.tasks.impl.defs.impl
 
 import OutputStream
-import java.util.*
 
 data class ObjectDefinition(
     val id: Int = 0,
