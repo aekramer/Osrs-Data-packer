@@ -10,7 +10,6 @@ import java.io.File
 fun main() {
     val app = Builder(TaskType.UPDATE_REV)
         .cacheLocation(File("./cache/"))
-        .cacheRevision(207)
         .extraTasks(RemoveXteas())
     .build()
     app.initialize()

@@ -113,12 +113,14 @@ object DownloadOSRS {
     private fun getLatest(caches: Array<CacheInfo>) = caches
         .filter { it.game.contains("oldschool") }
         .filter { it.builds.isNotEmpty() }
+        .filter { it.timestamp != null }
         .maxByOrNull { it.timestamp.stringToTimestamp().toEchochUTC()  } ?: error("Unable to find Latest Revision")
 
 
     private fun findRevision(rev : Int,caches: Array<CacheInfo>) = caches
         .filter { it.game.contains("oldschool") }
         .filter { it.builds.isNotEmpty() && it.builds[0].major == rev }
+        .filter { it.timestamp != null }
         .maxByOrNull { it.timestamp.stringToTimestamp().toEchochUTC()   } ?: error("Unable to find Latest Revision: $rev")
 
 }
